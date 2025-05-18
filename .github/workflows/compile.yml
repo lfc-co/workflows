@@ -1,5 +1,9 @@
 name: Compile LaTeX
 
+# Grant write access to repo contents
+permissions:
+  contents: write
+
 on:
   push:
     paths:
