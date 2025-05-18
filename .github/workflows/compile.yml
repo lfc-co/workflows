@@ -15,10 +15,10 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: 📦 Setup minimal TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
-        with:
-          scheme: scheme-basic  # installs only the basic TeX Live scheme
+      - name: 📥 Install minimal TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended
 
       - name: 🖨️ Compile all .tex to PDF
         run: |
