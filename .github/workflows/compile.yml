@@ -1,4 +1,3 @@
-# .github/workflows/compile.yml
 name: Compile LaTeX
 
 on:
@@ -9,23 +8,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
 
-      - name: Setup minimal TeX Live
+      - name: 📦 Setup minimal TeX Live
         uses: jamesmstone/setup-texlive@v1
         with:
-          # scheme-basic is ~200 MB; scheme-small ~400 MB
           scheme: scheme-basic
 
-      - name: Compile all .tex
+      - name: 🖨️ Compile all .tex to PDF
         run: |
           for f in *.tex; do
             pdflatex -interaction=nonstopmode "$f"
           done
 
-      - name: Commit PDFs if changed
+      - name: 🚀 Commit PDFs if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -34,7 +34,5 @@ jobs:
             git commit -m "📦 Compile LaTeX for ${{ github.event.head_commit.id }}"
             git push
           else
-            echo "✅ No PDF changes to commit"
+            echo "✅ No new PDFs to commit"
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
