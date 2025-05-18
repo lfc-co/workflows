@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: 🔄 Checkout repository
         uses: actions/checkout@v3
@@ -15,9 +16,9 @@ jobs:
           persist-credentials: true
 
       - name: 📦 Setup minimal TeX Live
-        uses: jamesmstone/setup-texlive@v1
+        uses: teatimeguest/setup-texlive-action@v3
         with:
-          scheme: scheme-basic
+          scheme: scheme-basic  # installs only the basic TeX Live scheme
 
       - name: 🖨️ Compile all .tex to PDF
         run: |
@@ -25,7 +26,7 @@ jobs:
             pdflatex -interaction=nonstopmode "$f"
           done
 
-      - name: 🚀 Commit PDFs if changed
+      - name: 🚀 Commit PDFs if any
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -36,3 +37,5 @@ jobs:
           else
             echo "✅ No new PDFs to commit"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
