@@ -1,3 +1,4 @@
+# .github/workflows/compile.yml
 name: Compile LaTeX
 
 on:
@@ -8,13 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install TeX Live
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+      - name: Setup minimal TeX Live
+        uses: jamesmstone/setup-texlive@v1
+        with:
+          # scheme-basic is ~200 MB; scheme-small ~400 MB
+          scheme: scheme-basic
 
       - name: Compile all .tex
         run: |
@@ -27,7 +30,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add *.pdf
-          # only commit if there's something staged:
           if ! git diff --cached --quiet; then
             git commit -m "📦 Compile LaTeX for ${{ github.event.head_commit.id }}"
             git push
