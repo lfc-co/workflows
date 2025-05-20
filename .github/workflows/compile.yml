@@ -1,45 +1,46 @@
-name: Compile LaTeX
+name: Build LaTeX
 
-# Grant write access to repo contents
 permissions:
   contents: write
 
 on:
   push:
+    # Watch all .tex anywhere in the repo
     paths:
-      - '*.tex'
+      - '**/*.tex'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔄 Checkout repository
-        uses: actions/checkout@v3
+      # 1) Check out your code
+      - uses: actions/checkout@v3
+
+      # 2) Use the Dante LaTeX Action (with built-in caching)
+      - name: Build LaTeX PDFs
+        uses: dante-ev/latex-action@v2
         with:
-          persist-credentials: true
+          # If you only have a single root .tex, point to it:
+          # root_file: 'worksheets/main.tex'
+          # If you want to compile *all* .tex files, you can run it once per file:
+          # (see notes below on matrix strategy)
+          compiler: 'latexmk'            # or pdflatex
+          compiler_args: ['-pdf','-quiet']
+          # This action will automatically cache the TeX Live packages it installs.
 
-      - name: 📥 Install minimal TeX Live
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended
-
-      - name: 🖨️ Compile all .tex to PDF
-        run: |
-          for f in *.tex; do
-            pdflatex -interaction=nonstopmode "$f"
-          done
-
-      - name: 🚀 Commit PDFs if any
+      # 3) Commit any newly created/updated PDFs
+      - name: Commit generated PDFs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add *.pdf
-          if ! git diff --cached --quiet; then
-            git commit -m "📦 Compile LaTeX for ${{ github.event.head_commit.id }}"
-            git push
-          else
+          # Stage all PDFs anywhere
+          git add '**/*.pdf'
+          if git diff --cached --quiet; then
             echo "✅ No new PDFs to commit"
+          else
+            git commit -m "📦 Build LaTeX PDFs (${github.sha})"
+            git push
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
