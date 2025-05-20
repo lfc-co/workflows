@@ -1,0 +1,91 @@
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Worksheet ? HUnit\_4-2\_Notes ? HUnit\_4-2\_Notes}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction to HUnit}
+HUnit is a unit testing framework for Haskell that allows developers to write tests for their programs. This section provides a brief overview of how to set up and use HUnit.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Test Cases:} Individual tests that check a specific aspect of your code.
+    \item \textbf{Test Suites:} A collection of test cases that can be run together.
+    \item \textbf{Assertions:} Methods to check if a certain condition holds true.
+\end{itemize}
+
+\textbf{Practice Problems:}
+1. Write a simple test case that checks if a function `add` correctly adds two numbers.
+2. Create a test suite that includes multiple test cases.
+
+\section*{Setting Up HUnit}
+To use HUnit, you need to install the HUnit library. You can do this using the following command:
+
+\begin{verbatim}
+cabal install HUnit
+\end{verbatim}
+
+Once installed, you can import the library in your Haskell file:
+
+\begin{verbatim}
+import Test.HUnit
+\end{verbatim}
+
+\textbf{Practice Problems:}
+1. Describe how to set up a new Haskell project to include HUnit.
+2. Write a Haskell function and its corresponding test case.
+
+\section*{Writing Test Cases}
+A test case is written using the `TestCase` function. Here is a simple example:
+
+\begin{verbatim}
+test1 = TestCase (assertEqual "for (add 1 2)," 3 (add 1 2))
+\end{verbatim}
+
+\textbf{Practice Problems:}
+1. Write a test case for a function `multiply` that multiplies two numbers.
+2. What will happen if the assertion fails?
+
+\section*{Running Test Suites}
+Test suites can be created using the `TestList` function, and they can be executed using the `runTestTT` function. Here?s an example:
+
+\begin{verbatim}
+tests = TestList [test1, test2]
+runTestTT tests
+\end{verbatim}
+
+\textbf{Practice Problems:}
+1. Create a test suite that includes at least three different test cases.
+2. Explain how to interpret the output of `runTestTT`.
+
+\section*{Answer Key}
+\textbf{Practice Problems Answers:}
+
+1. For the test case checking the `add` function:
+   - Define `add` and create a test case like `testAdd = TestCase (assertEqual "add test" 3 (add 1 2))`.
+  
+2. Setting up a new Haskell project:
+   - Create a new directory and run `cabal init`.
+   - Add `HUnit` to the dependencies in the `.cabal` file.
+  
+3. Creating a test case for `multiply`:
+   - `testMultiply = TestCase (assertEqual "multiply test" 6 (multiply 2 3))`.
+
+4. If an assertion fails, HUnit will report it in the test results, indicating which test failed and why.
+
+5. Test suite example:
+   - `tests = TestList [testAdd, testMultiply]`.
+
+6. Interpreting `runTestTT` output:
+   - It indicates the number of tests run, how many passed, and how many failed.
+
+\end{document}
+```
