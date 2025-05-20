@@ -1,0 +1,90 @@
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Worksheet ? HUnit\_4-2\_Notes ? HUnit\_4-2\_Notes}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Understanding HUnit}
+HUnit is a unit testing framework for Haskell that allows developers to write tests for their code in a structured way. It helps in ensuring that individual components of a program function correctly.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Test Cases:} Individual tests that check specific functionality.
+    \item \textbf{Test Suites:} A collection of test cases that can be run together.
+    \item \textbf{Assertions:} Statements that check if a condition is true.
+\end{itemize}
+
+\textbf{Practice Problems:}
+\begin{enumerate}
+    \item Write a simple test case using HUnit to check if the addition function works correctly. 
+    \item Create a test suite that includes at least three different test cases.
+\end{enumerate}
+
+\section*{Writing Test Cases}
+Writing effective test cases is crucial for ensuring software quality. Each test case should be clear, concise, and cover a specific behavior of the code.
+
+\textbf{Format of a Test Case:}
+\begin{verbatim}
+testName = TestCase (assertEqual "description" expected actual)
+\end{verbatim}
+
+\textbf{Practice Problems:}
+\begin{enumerate}
+    \item Write a test case for a function that calculates the maximum of two numbers.
+    \item Modify the previous test case to include a scenario where both numbers are equal.
+\end{enumerate}
+
+\section*{Running Tests}
+Once test cases are written, they can be executed to check if the code behaves as expected. 
+
+\textbf{Command to Run Tests:}
+\begin{verbatim}
+runTestTT tests
+\end{verbatim}
+
+\textbf{Practice Problems:}
+\begin{enumerate}
+    \item Write the command to run a test suite named `myTests`.
+    \item Explain what happens when a test fails.
+\end{enumerate}
+
+\section*{Answer Key}
+\textbf{Answers to Practice Problems:}
+
+\section*{Understanding HUnit}
+1. Example test case:
+\begin{verbatim}
+testAddition = TestCase (assertEqual "1 + 1 should equal 2" 2 (1 + 1))
+\end{verbatim}
+2. Example test suite:
+\begin{verbatim}
+myTests = TestList [testAddition, testSubtraction, testMultiplication]
+\end{verbatim}
+
+\section*{Writing Test Cases}
+1. Example test case for max function:
+\begin{verbatim}
+testMax = TestCase (assertEqual "max of 3 and 5 should be 5" 5 (max 3 5))
+\end{verbatim}
+2. Modified test case:
+\begin{verbatim}
+testMaxEqual = TestCase (assertEqual "max of 5 and 5 should be 5" 5 (max 5 5))
+\end{verbatim}
+
+\section*{Running Tests}
+1. Command to run `myTests`:
+\begin{verbatim}
+runTestTT myTests
+\end{verbatim}
+2. When a test fails, it indicates that the actual output did not match the expected output, which helps in identifying issues in the code.
+
+\end{document}
+```
