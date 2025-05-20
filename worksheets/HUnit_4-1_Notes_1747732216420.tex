@@ -1,0 +1,71 @@
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Worksheet ? HUnit\_4-1\_Notes ? HUnit\_4-1\_Notes}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Topic 1: Introduction to HUnit}
+HUnit is a unit testing framework for Haskell, which allows developers to write and run tests. Unit testing helps ensure that individual components of a program work as intended.
+
+\textbf{Explanatory Notes:}
+- HUnit tests are written as functions that return a test case.
+- Each test case can be grouped into test suites to run multiple tests together.
+
+\textbf{Practice Problems:}
+1. Write a simple HUnit test for a function that adds two numbers.
+2. Create a test suite that includes tests for both addition and subtraction functions.
+
+\section*{Topic 2: Writing Test Cases}
+To write a test case in HUnit, you can use the `TestCase` function.
+
+\textbf{Explanatory Notes:}
+- Each test case should check for expected outcomes.
+- Use assertions like `assertEqual` to verify results.
+
+\textbf{Practice Problems:}
+1. Write a test case that checks if the function `multiply` correctly multiplies two integers.
+2. Create a test case that verifies the behavior of a function that returns the maximum of two numbers.
+
+\section*{Topic 3: Running Tests}
+Tests can be executed using the `runTestTT` function which runs all tests and reports the results.
+
+\textbf{Explanatory Notes:}
+- Running tests helps identify errors and ensure code quality.
+- Review the output carefully to understand which tests passed or failed.
+
+\textbf{Practice Problems:}
+1. Write a function that runs a test suite containing three test cases.
+2. Modify a failing test case to ensure it passes, then rerun the tests.
+
+\section*{Answer Key}
+1. 
+```haskell
+testAdd = TestCase (assertEqual "for (1+2)," 3 (add 1 2))
+```
+2. 
+```haskell
+testSuite = TestList [testAdd, testSubtract]
+```
+3. 
+```haskell
+main = runTestTT testSuite
+```
+4. 
+```haskell
+testMultiply = TestCase (assertEqual "for (3*2)," 6 (multiply 3 2))
+```
+5. 
+```haskell
+testMax = TestCase (assertEqual "for (3, 5)," 5 (max 3 5))
+```
+
+\end{document}
+```
