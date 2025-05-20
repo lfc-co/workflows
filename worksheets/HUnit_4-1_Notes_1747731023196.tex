@@ -1,0 +1,80 @@
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Worksheet ? HUnit_4-1_Notes ? HUnit_4-1_Notes}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Topic 1: Introduction to HUnit}
+HUnit is a unit testing framework for Haskell that allows you to write tests for your code. It helps ensure that your code behaves as expected and helps identify bugs early in the development process. 
+
+\subsection*{Explanatory Notes}
+Unit tests are small tests that focus on individual parts of your code. In HUnit, a test case can be written using the `testCase` function which takes a string (the name of the test) and an action to perform.
+
+\subsection*{Practice Problems}
+1. Write a simple test case that checks if the addition of two numbers is correct.
+2. Create a test case that verifies the output of a function that multiplies two integers.
+
+\subsection*{Answer Key}
+1. 
+\begin{verbatim}
+testCase "Addition Test" $ assertEqual "1 + 1 should be 2" 2 (1 + 1)
+\end{verbatim}
+2. 
+\begin{verbatim}
+testCase "Multiplication Test" $ assertEqual "2 * 3 should be 6" 6 (2 * 3)
+\end{verbatim}
+
+\section*{Topic 2: Writing Test Cases}
+Writing effective test cases is crucial for good software development. Each test case should focus on a single aspect of your code.
+
+\subsection*{Explanatory Notes}
+When writing a test case, consider the following:
+- What is the expected output?
+- What are the edge cases?
+- How will you handle exceptions?
+
+\subsection*{Practice Problems}
+1. Write a test case for a function that divides two numbers, ensuring it handles division by zero.
+2. Create a test case for a function that returns the maximum of a list of integers.
+
+\subsection*{Answer Key}
+1. 
+\begin{verbatim}
+testCase "Division Test" $ assertEqual "Division by zero should throw error" (Right "Cannot divide by zero") (safeDivide 5 0)
+\end{verbatim}
+2. 
+\begin{verbatim}
+testCase "Max of List Test" $ assertEqual "Max of [1, 2, 3] should be 3" 3 (maxOfList [1, 2, 3])
+\end{verbatim}
+
+\section*{Topic 3: Running Tests}
+To run your tests, you need to use the HUnit framework which provides a way to execute all your test cases and report the results.
+
+\subsection*{Explanatory Notes}
+You can run tests by creating a test suite and using the `runTestTT` function. The results will indicate which tests passed and which failed.
+
+\subsection*{Practice Problems}
+1. Set up a test suite that includes the test cases created in the previous sections.
+2. Write a command to run your test suite and display the results.
+
+\subsection*{Answer Key}
+1. 
+\begin{verbatim}
+tests = test [ testCase "Addition Test" $ assertEqual ...,
+               testCase "Multiplication Test" $ assertEqual ... ]
+\end{verbatim}
+2. 
+\begin{verbatim}
+main = runTestTT tests
+\end{verbatim}
+
+\end{document}
+```
