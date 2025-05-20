@@ -1,0 +1,71 @@
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Worksheet ? HUnit\_4-3\_Notes ? HUnit\_4-3\_Notes}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Topic 1: Understanding HUnit}
+HUnit is a unit testing framework for Haskell. It allows developers to write test cases for their Haskell programs, ensuring that the code works as expected. Unit tests help identify bugs and validate that code changes do not introduce new issues.
+
+\subsection*{Practice Problems}
+1. Write a simple HUnit test to check if a function `add` that adds two integers returns the correct result.
+2. Explain the importance of unit testing in software development.
+
+\subsection*{Answer Key}
+1. A sample HUnit test for the `add` function could look like this:
+   \begin{verbatim}
+   import Test.HUnit
+
+   add :: Int -> Int -> Int
+   add x y = x + y
+
+   testAdd = TestCase (assertEqual "for (add 1 2)," 3 (add 1 2))
+
+   main = runTestTT testAdd
+   \end{verbatim}
+2. Unit testing is important because it helps ensure code reliability, facilitates code refactoring, and provides documentation for code behavior.
+
+\section*{Topic 2: Writing Test Cases}
+Writing effective test cases is crucial for successful unit testing. Test cases should be clear, concise, and cover a variety of scenarios, including edge cases.
+
+\subsection*{Practice Problems}
+1. Create test cases for a function that calculates the factorial of a number.
+2. What should you consider when writing test cases for edge cases?
+
+\subsection*{Answer Key}
+1. Sample test cases for a `factorial` function:
+   \begin{verbatim}
+   factorial :: Int -> Int
+   factorial 0 = 1
+   factorial n = n * factorial (n - 1)
+
+   testFactorial = TestList [
+       TestCase (assertEqual "for factorial 0," 1 (factorial 0)),
+       TestCase (assertEqual "for factorial 5," 120 (factorial 5)),
+       TestCase (assertEqual "for factorial 1," 1 (factorial 1))
+   ]
+
+   main = runTestTT testFactorial
+   \end{verbatim}
+2. When writing test cases for edge cases, consider inputs that are at the limits of acceptable values, such as zero, negative numbers, or very large numbers.
+
+\section*{Topic 3: Running Tests}
+Running tests is an essential part of the development process. Tests can be run in isolation or as part of a larger suite, and the results should be reviewed to identify any failures.
+
+\subsection*{Practice Problems}
+1. Describe how to run a set of HUnit tests from the command line.
+2. What should you do if some tests fail?
+
+\subsection*{Answer Key}
+1. To run a set of HUnit tests from the command line, use GHCi or create an executable that includes the `main` function which runs `runTestTT`. Compile and run the program.
+2. If some tests fail, investigate the failing tests to determine the cause. Review the code and the tests themselves to identify any discrepancies or errors.
+
+\end{document}
+```
